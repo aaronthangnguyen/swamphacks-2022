@@ -4,7 +4,7 @@ import React from "react";
 
 const Rating = () => {
   return (
-    <Box my="0.125rem">
+    <Box mb="0.25rem">
       <ReactionBarSelector
         reactions={[
           { label: "Easy", node: <div>😎</div> },
