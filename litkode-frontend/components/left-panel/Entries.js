@@ -8,7 +8,7 @@ const Entries = () => {
       {
         id: "176",
         rating: 0,
-        lastPracticeDate: new Date(),
+        lastPracticeDate: null,
       },
       {
         id: "89",
