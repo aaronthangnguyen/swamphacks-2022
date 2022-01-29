@@ -1,15 +1,16 @@
-from datetime import datetime
 import json
+import sqlite3
+from datetime import datetime
+from sqlite3 import Error
+from typing import Optional
+
+import numpy as np
 import pandas as pd
 import requests
-import numpy as np
-import sqlite3
-from sqlite3 import Error
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
-from pydantic import BaseModel
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 app = FastAPI()
 
