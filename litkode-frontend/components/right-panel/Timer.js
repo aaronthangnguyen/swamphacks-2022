@@ -13,8 +13,10 @@ const Timer = () => {
         <title>
           Litkode 🔥
           {isRunning
-            ? ` ${String(minutes).padStart(2, "0")}:
-          ${String(seconds).padStart(2, "0")}`
+            ? `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+                2,
+                "0"
+              )}`
             : ""}
         </title>
         <meta name="description" content="A journey to 6-figure salary..." />
