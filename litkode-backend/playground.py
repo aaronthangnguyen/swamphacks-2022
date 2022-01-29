@@ -64,14 +64,13 @@ async def read_data():
     return JSONResponse({"data": r})
 
 
-@app.post("/api/questions/{id}")
-async def write_data(id: str):
+@app.post("/api/questions", status_code=201)
+async def write_data(item: Item):
     c = conn.cursor()
     sql = """INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)"""
-    val = (id, 0, None)
+    val = (item.id, 0, None)
     c.execute(sql, val)
     conn.commit()
-    print("SQL insert process finished")
 
 
 @app.patch("/api/questions/{id}")
