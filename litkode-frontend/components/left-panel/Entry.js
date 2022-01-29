@@ -13,13 +13,15 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import useSWR from "swr";
+import colors from "../data/colors.json";
+import ratings from "../data/ratings.json";
 import Rating from "./Rating";
 import Topics from "./Topics";
-import colors from "../data/colors.json";
 
 const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { data } = useSWR(`https://lcid.cc/info/${id}`);
+
   return (
     <>
       <Box
@@ -44,7 +46,9 @@ const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
           >
             {data?.difficulty}
           </Text>
-          <Text width="8rem">{rating}</Text>
+          <Text fontWeight="medium" width="8rem" color={colors[rating]}>
+            {ratings[rating]}
+          </Text>
           <IconButton
             size="sm"
             aria-label="Toggle collapse"
