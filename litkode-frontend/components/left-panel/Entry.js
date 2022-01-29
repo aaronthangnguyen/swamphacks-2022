@@ -18,7 +18,7 @@ import ratings from "../data/ratings.json";
 import Rating from "./Rating";
 import Topics from "./Topics";
 
-const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
+const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { data } = useSWR(`https://lcid.cc/info/${id}`);
 
@@ -30,8 +30,10 @@ const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
         p="1rem"
         mt="0.5rem"
         boxShadow="base"
+        transition="all .2s ease-in-out"
         _hover={{
           boxShadow: "md",
+          transform: "translateY(-0.125rem) scale(1.05)",
         }}
       >
         <Flex justify="space-between" align="center" gap={1}>
@@ -75,8 +77,8 @@ const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
             <Text color="gray.500">
               Last Practice:{" "}
               {lastPracticeDate
-                ? "Never"
-                : lastPracticeDate.toLocaleDateString()}
+                ? lastPracticeDate.toLocaleString("en-US")
+                : "Never"}
             </Text>
             <Rating />
           </Flex>
