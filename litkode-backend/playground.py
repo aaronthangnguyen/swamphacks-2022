@@ -1,15 +1,16 @@
-from datetime import datetime
 import json
+import sqlite3
+from datetime import datetime
+from sqlite3 import Error
+from typing import Optional
+
+import numpy as np
 import pandas as pd
 import requests
-import numpy as np
-import sqlite3
-from sqlite3 import Error
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
-from pydantic import BaseModel
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -62,23 +63,13 @@ async def read_data():
         for row in cur.fetchall()
     ]
     return JSONResponse({"data": r})
-    # result = c.fetchall()
-    # return result
 
 
-# @app.get("/api/questions/{id}")
-# async def read_data():
-#     c = conn.cursor()
-#     c.execute('SELECT * FROM User')
-#     result = c.fetchall()
-#     return result
-
-
-@app.post("/api/questions/{id}")
-async def write_data(id: str):
+@app.post("/api/questions", status_code=201)
+async def write_data(item: Item):
     c = conn.cursor()
     sql = """INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)"""
-    val = (id, 0, None)
+    val = (item.id, 0, None)
     c.execute(sql, val)
     conn.commit()
     print("SQL insert process finished")
