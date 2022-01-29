@@ -80,7 +80,7 @@ async def write_data(id: str):
     sql = """INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)"""
     val = (id, 0, None)
     c.execute(sql, val)
-    c.commit()
+    conn.commit()
     print("SQL insert process finished")
 
 
@@ -93,7 +93,7 @@ async def create_data(item: Item):
     sql = """UPDATE User SET rating = ?, lastPracticeDate = ? WHERE id = ?"""
     val = (item_rating, item_lastPracticeDate, item_id)
     c.execute(sql, val)
-    c.commit()
+    conn.commit()
     print("SQL insert process finished")
 
 
@@ -102,4 +102,4 @@ async def delete_item(id: str):
     c = conn.cursor()
     sql = """DELETE FROM User WHERE id = ?"""
     c.execute(sql, (id,))
-    c.commit()
+    conn.commit()
