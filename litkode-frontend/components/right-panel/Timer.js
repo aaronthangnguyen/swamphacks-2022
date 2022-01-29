@@ -1,4 +1,5 @@
 import { Button, Box, Text, Flex, Heading } from "@chakra-ui/react";
+import Head from "next/head";
 import React from "react";
 import { useStopwatch } from "react-timer-hook";
 
@@ -8,6 +9,17 @@ const Timer = () => {
   });
   return (
     <Box mb="1rem">
+      <Head>
+        <title>
+          Litkode 🔥
+          {isRunning
+            ? ` ${String(minutes).padStart(2, "0")}:
+          ${String(seconds).padStart(2, "0")}`
+            : ""}
+        </title>
+        <meta name="description" content="A journey to 6-figure salary..." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Heading size="lg" mb="1rem">
         Timer
       </Heading>
