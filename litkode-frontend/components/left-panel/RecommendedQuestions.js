@@ -8,7 +8,8 @@ const RecommendedQuestions = () => {
       <Heading size="lg" mb="1rem">
         🌟 Recommended
       </Heading>
-      <Entry />
+      <Entry id={176} />
+      <Entry id={171} />
     </Box>
   );
 };
