@@ -71,6 +71,7 @@ async def write_data(item: Item):
     val = (item.id, 0, None)
     c.execute(sql, val)
     conn.commit()
+    print("SQL insert process finished")
 
 
 @app.patch("/api/questions/{id}")
