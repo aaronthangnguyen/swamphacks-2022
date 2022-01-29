@@ -1,7 +1,7 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import AddQuestion from "./AddQuestion";
-import Entry from "./Entry";
+import Entries from "./Entries";
 
 const AllQuestions = () => {
   return (
@@ -12,7 +12,7 @@ const AllQuestions = () => {
         </Heading>
         <AddQuestion />
       </Flex>
-      <Entry id={23} />
+      <Entries />
     </Box>
   );
 };
