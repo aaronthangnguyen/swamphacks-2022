@@ -1,10 +1,6 @@
-# Brainstorm
+# Litkode
 
-1. Deals: curated subreddits
-2. Sign-language motion capture
-3. Leetcode Practice <-
-
-# LeetCode Practice
+## Specifications
 
 - Fetch all questions
 - Store in database
@@ -12,6 +8,8 @@
 - Allow users to rate questions' difficulty: Easy, Medium, Hard
 - Recommend users weak topics
 - Add timer
+
+## Endpoints
 
 ### `api/questions`
 
@@ -22,33 +20,9 @@
   "data": [
     {
       "id": string,
-      "title": string,
-      "titleSlug": string,
-      "difficulty": string,
+      "rating": string,
       "lastPracticeDate": Date,
-      "topicTags": [
-        "id": string,
-        "name": string,
-        "slug": string
-      ]
     }, ...
-  ]
-}
-```
-
-**GET** `api/questions/[:id]`
-
-```json
-{
-  "id": string,
-  "title": string,
-  "titleSlug": string,
-  "difficulty": string,
-  "lastPracticeDate": Date,
-  "topicTags": [
-    "id": string,
-    "name": string,
-    "slug": string
   ]
 }
 ```
@@ -84,4 +58,17 @@ Note: Backend should parse JSON Date format. i.e: `2012-04-23T18:25:43.511Z`
       id,...
     ]
   }
+```
+
+```
+{
+  id: string,
+  rating: int,
+  lastPracticeDate: Date
+}
+rating = 0 | 1 | 2 | 3
+0 -> never
+1 -> easy
+2 -> medium
+3 -> hard
 ```
