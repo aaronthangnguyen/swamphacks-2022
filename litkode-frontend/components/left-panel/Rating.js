@@ -9,7 +9,7 @@ const Rating = () => {
         reactions={[
           { label: "Easy", node: <div>😎</div> },
           { label: "Medium", node: <div>😌</div> },
-          { label: "Hard", node: <div>😭</div> },
+          { label: "Hard", node: <div>😱</div> },
         ]}
       />
     </Box>
