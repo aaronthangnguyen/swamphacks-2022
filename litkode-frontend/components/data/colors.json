@@ -1,5 +1,9 @@
 {
   "Easy": "green.500",
   "Medium": "orange.400",
-  "Hard": "red.500"
+  "Hard": "red.500",
+  "0": "gray.400",
+  "1": "purple.600",
+  "2": "yellow.500",
+  "3": "red.500"
 }
