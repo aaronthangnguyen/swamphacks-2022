@@ -1,22 +1,13 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
-import Entry from "./Entry";
+import AllQuestions from "./AllQuestions";
+import RecommendedQuestions from "./RecommendedQuestions";
 
 const LeftPanel = () => {
   return (
     <Box>
-      <Box>
-        <Heading size="lg" mb="1rem">
-          🌟 Recommended
-        </Heading>
-        <Entry />
-      </Box>
-      <Box mt="2rem">
-        <Heading size="lg" mb="1rem">
-          🔥 All
-        </Heading>
-        <Entry />
-      </Box>
+      <RecommendedQuestions />
+      <AllQuestions />
     </Box>
   );
 };
