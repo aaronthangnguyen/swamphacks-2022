@@ -74,7 +74,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
             <Topics topicTags={data?.topicTags} />
           </Flex>
           <Flex justify="space-between" align="baseline">
-            <Text color="gray.500">
+            <Text fontWeight="medium" color="gray.500">
               Last Practice:{" "}
               {lastPracticeDate
                 ? lastPracticeDate.toLocaleString("en-US")
