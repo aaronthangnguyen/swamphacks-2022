@@ -10,6 +10,7 @@ const Title = () => {
       fontFamily="Righteous"
       letterSpacing="3px"
       color="orange.900"
+      pt="1rem"
     >
       Litkode🔥
     </Heading>

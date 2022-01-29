@@ -13,7 +13,7 @@ export default function Home() {
         <meta name="description" content="A journey to 6-figure salary..." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container maxWidth="container.lg" my="1rem" as="main">
+      <Container maxWidth="container.lg" as="main">
         <Title />
         <Flex mt="2rem" gap="2rem">
           <Box flex={1}>
