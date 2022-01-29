@@ -20,20 +20,20 @@ const RightPanel = () => {
         <Box background="white" rounded="lg" p="1rem" boxShadow="base">
           <Flex justify="space-between">
             <Box>
-              <Text fontWeight="semibold" textColor="green.500">
-                Easy{" "}
+              <Text fontWeight="bold" textColor="green.500">
+                Easy
               </Text>
-              <Text fontWeight="semibold" textColor="orange.400">
-                Medium{" "}
+              <Text fontWeight="bold" textColor="orange.400">
+                Medium
               </Text>
-              <Text fontWeight="semibold" textColor="red.500">
-                Hard{" "}
+              <Text fontWeight="bold" textColor="red.500">
+                Hard
               </Text>
             </Box>
             <Box>
-              <Text fontWeight="semibold">3/10</Text>
-              <Text fontWeight="semibold">5/10</Text>
-              <Text fontWeight="semibold">2/10</Text>
+              <Text fontWeight="medium">3/10</Text>
+              <Text fontWeight="medium">5/10</Text>
+              <Text fontWeight="medium">2/10</Text>
             </Box>
           </Flex>
         </Box>
