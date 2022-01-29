@@ -9,7 +9,7 @@ const Title = () => {
       fontWeight="bold"
       fontFamily="Righteous"
       letterSpacing="3px"
-      color="gray.900"
+      color="orange.900"
     >
       Litkode🔥
     </Heading>
