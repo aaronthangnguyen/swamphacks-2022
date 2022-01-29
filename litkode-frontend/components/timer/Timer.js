@@ -6,10 +6,6 @@ const Timer = () => {
   const { seconds, minutes, isRunning, start, pause, reset } = useStopwatch({
     autoStart: false,
   });
-  const handleReset = () => {
-    reset();
-    pause();
-  };
   return (
     <Box>
       <Text fontWeight="bold" fontSize="3xl" display="block" textAlign="center">
@@ -26,7 +22,12 @@ const Timer = () => {
         >
           {isRunning ? "Pause" : "Start"}
         </Button>
-        <Button width="50%" onClick={handleReset}>
+        <Button
+          width="50%"
+          onClick={() => {
+            reset(0, false);
+          }}
+        >
           Reset
         </Button>
       </Flex>
