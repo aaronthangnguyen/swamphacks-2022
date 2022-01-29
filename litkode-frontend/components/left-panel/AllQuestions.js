@@ -1,7 +1,7 @@
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
-import { Box, Heading, IconButton, Flex } from "@chakra-ui/react";
+import AddQuestion from "./AddQuestion";
 import Entry from "./Entry";
-import { AddIcon } from "@chakra-ui/icons";
 
 const AllQuestions = () => {
   return (
@@ -10,14 +10,9 @@ const AllQuestions = () => {
         <Heading size="lg" mb="1rem">
           🔥 All
         </Heading>
-        <IconButton
-          colorScheme="litkode"
-          aria-label="Add a question"
-          icon={<AddIcon />}
-          ml="1rem"
-        />
+        <AddQuestion />
       </Flex>
-      <Entry />
+      <Entry id={23} />
     </Box>
   );
 };
