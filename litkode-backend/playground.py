@@ -9,11 +9,17 @@ from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+
 app = FastAPI()
+
+
 class Item(BaseModel):
     id: str
     rating: Optional[int] = 0
     lastPracticeDate: Optional[datetime] = None
+
+
 def connect_to_db(db_file):
     """
     Connect to an SQlite database, if db file does not exist it will be created
@@ -32,26 +38,33 @@ def connect_to_db(db_file):
         if sqlite3_conn is not None:
             sqlite3_conn.close()
 
-conn = connect_to_db('/Users/yagya/Desktop/database.db')
+
+conn = connect_to_db("database.db")
+
 
 @app.on_event("startup")
 def checkConnection():
     if conn is None:
         print("connection failed")
 
+
 @app.on_event("shutdown")
 def closeConnection():
     conn.close()
 
+
 @app.get("/api/questions")
 async def read_data():
     cur = conn.cursor()
-    cur.execute('SELECT * FROM User')
-    r = [dict((cur.description[i][0], value) \
-               for i, value in enumerate(row)) for row in cur.fetchall()]
-    return json.dumps(r)
+    cur.execute("SELECT * FROM User")
+    r = [
+        dict((cur.description[i][0], value) for i, value in enumerate(row))
+        for row in cur.fetchall()
+    ]
+    return JSONResponse({"data": r})
     # result = c.fetchall()
     # return result
+
 
 # @app.get("/api/questions/{id}")
 # async def read_data():
@@ -64,29 +77,28 @@ async def read_data():
 @app.post("/api/questions/{id}")
 async def write_data(id: str):
     c = conn.cursor()
-    sql = '''INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)'''
-    val = (id,0,None)
-    c.execute(sql,val)
+    sql = """INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)"""
+    val = (id, 0, None)
+    c.execute(sql, val)
     conn.commit()
-    print('SQL insert process finished')
+    print("SQL insert process finished")
+
 
 @app.patch("/api/questions/{id}")
-async def create_data(item:Item):
+async def create_data(item: Item):
     item_id = item.id
     item_rating = item.rating
     item_lastPracticeDate = item.lastPracticeDate
     c = conn.cursor()
-    sql = '''UPDATE User SET rating = ?, lastPracticeDate = ? WHERE id = ?'''
-    val = (item_rating,item_lastPracticeDate,item_id)
-    c.execute(sql,val)
+    sql = """UPDATE User SET rating = ?, lastPracticeDate = ? WHERE id = ?"""
+    val = (item_rating, item_lastPracticeDate, item_id)
+    c.execute(sql, val)
     conn.commit()
-    print('SQL insert process finished')
+    print("SQL insert process finished")
+
 
 @app.delete("/api/questions/{id}")
 async def delete_item(id: str):
     c = conn.cursor()
-    sql = '''DELETE FROM User WHERE id = ?'''
-    c.execute(sql,(id,))
-    
-
-
+    sql = """DELETE FROM User WHERE id = ?"""
+    c.execute(sql, (id,))
