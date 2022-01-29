@@ -62,16 +62,6 @@ async def read_data():
         for row in cur.fetchall()
     ]
     return JSONResponse({"data": r})
-    # result = c.fetchall()
-    # return result
-
-
-# @app.get("/api/questions/{id}")
-# async def read_data():
-#     c = conn.cursor()
-#     c.execute('SELECT * FROM User')
-#     result = c.fetchall()
-#     return result
 
 
 @app.post("/api/questions/{id}")
