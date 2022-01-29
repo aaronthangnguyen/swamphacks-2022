@@ -48,7 +48,7 @@ const Entry = () => {
           >
             <IconButton
               size="sm"
-              aria-label="Go to Leetcode question"
+              aria-label="Go to Leetcode"
               icon={<ExternalLinkIcon />}
             />
           </a>
