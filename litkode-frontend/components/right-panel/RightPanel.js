@@ -1,0 +1,45 @@
+import React from "react";
+import { Box, Heading, Text, Flex } from "@chakra-ui/react";
+import Timer from "../timer/Timer";
+
+const RightPanel = () => {
+  return (
+    <>
+      <Box mb="1rem">
+        <Heading size="lg" mb="1rem">
+          Timer
+        </Heading>
+        <Box background="white" rounded="lg" p="1rem" boxShadow="base">
+          <Timer />
+        </Box>
+      </Box>
+      <Box>
+        <Heading size="lg" mb="1rem">
+          Statistics
+        </Heading>
+        <Box background="white" rounded="lg" p="1rem" boxShadow="base">
+          <Flex justify="space-between">
+            <Box>
+              <Text fontWeight="semibold" textColor="green.500">
+                Easy{" "}
+              </Text>
+              <Text fontWeight="semibold" textColor="orange.400">
+                Medium{" "}
+              </Text>
+              <Text fontWeight="semibold" textColor="red.500">
+                Hard{" "}
+              </Text>
+            </Box>
+            <Box>
+              <Text fontWeight="semibold">3/10</Text>
+              <Text fontWeight="semibold">5/10</Text>
+              <Text fontWeight="semibold">2/10</Text>
+            </Box>
+          </Flex>
+        </Box>
+      </Box>
+    </>
+  );
+};
+
+export default RightPanel;
