@@ -1,25 +1,29 @@
 import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ExternalLinkIcon,
+} from "@chakra-ui/icons";
+import {
   Box,
   Collapse,
   Flex,
+  IconButton,
   Text,
   useDisclosure,
-  IconButton,
 } from "@chakra-ui/react";
-import {
-  ExternalLinkIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@chakra-ui/icons";
 import React from "react";
+import useSWR from "swr";
 import Rating from "./Rating";
+import Topics from "./Topics";
+import colors from "../data/colors.json";
 
-const Entry = () => {
+const Entry = ({ id, rating = "", lastPracticeDate = new Date(0) }) => {
   const { isOpen, onToggle } = useDisclosure();
+  const { data } = useSWR(`https://lcid.cc/info/${id}`);
   return (
     <>
       <Box
-        background="gray.50"
+        background="white"
         rounded="md"
         p="1rem"
         mt="0.5rem"
@@ -29,12 +33,18 @@ const Entry = () => {
         }}
       >
         <Flex justify="space-between" align="center" gap={1}>
-          <Text width="6rem">ID</Text>
-          <Text fontWeight="medium" flex={1}>
-            Title
+          <Text width="3rem">{id}</Text>
+          <Text fontWeight="medium" flex={1} isTruncated>
+            {data?.title}
           </Text>
-          <Text width="8rem">Difficulty</Text>
-          <Text width="8rem">Rating</Text>
+          <Text
+            width="8rem"
+            fontWeight="semibold"
+            color={colors[data?.difficulty]}
+          >
+            {data?.difficulty}
+          </Text>
+          <Text width="8rem">{rating}</Text>
           <IconButton
             size="sm"
             aria-label="Toggle collapse"
@@ -42,7 +52,7 @@ const Entry = () => {
             onClick={onToggle}
           />
           <a
-            href="https://leetcode.com/"
+            href={`https://lcid.cc/${id}`}
             rel="noreferrer noopener"
             target="_blank"
           >
@@ -55,10 +65,15 @@ const Entry = () => {
         </Flex>
         <Collapse in={isOpen} animateOpacity>
           <Flex mt="1rem">
-            <Text>Topics</Text>
+            <Topics topicTags={data?.topicTags} />
           </Flex>
           <Flex justify="space-between" align="baseline">
-            <Text color="gray.500">Last Practice: [Date]</Text>
+            <Text color="gray.500">
+              Last Practice:{" "}
+              {lastPracticeDate
+                ? "Never"
+                : lastPracticeDate.toLocaleDateString()}
+            </Text>
             <Rating />
           </Flex>
         </Collapse>
