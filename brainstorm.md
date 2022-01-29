@@ -19,16 +19,17 @@
 
 ```json
 {
-  data: [
+  "data": [
     {
-      id: string,
-      title: string,
-      titleSlug: string,
-      difficulty: string,
-      topicTags: [
-        id: string,
-        name: string,
-        slug: string
+      "id": string,
+      "title": string,
+      "titleSlug": string,
+      "difficulty": string,
+      "lastPracticeDate": Date,
+      "topicTags": [
+        "id": string,
+        "name": string,
+        "slug": string
       ]
     }, ...
   ]
@@ -39,14 +40,15 @@
 
 ```json
 {
-  id: string,
-  title: string,
-  titleSlug: string,
-  difficulty: string,
-  topicTags: [
-    id: string,
-    name: string,
-    slug: string
+  "id": string,
+  "title": string,
+  "titleSlug": string,
+  "difficulty": string,
+  "lastPracticeDate": Date,
+  "topicTags": [
+    "id": string,
+    "name": string,
+    "slug": string
   ]
 }
 ```
@@ -55,7 +57,7 @@
 
 ```json
 {
-  id: string
+  "id": string
 }
 ```
 
@@ -65,9 +67,12 @@
 
 ```json
 {
-  rating: int
+  "rating": int (optional),
+  "lastPractice": Date (optional)
 }
 ```
+
+Note: Backend should parse JSON Date format. i.e: `2012-04-23T18:25:43.511Z`
 
 ### `api/recommendations`
 
@@ -75,7 +80,7 @@
 
 ```json
   {
-    data: [
+    "data": [
       id,...
     ]
   }
