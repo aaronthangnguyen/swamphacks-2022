@@ -5,10 +5,10 @@ import RecommendedQuestions from "./RecommendedQuestions";
 
 const LeftPanel = () => {
   return (
-    <Box>
+    <>
       <RecommendedQuestions />
       <AllQuestions />
-    </Box>
+    </>
   );
 };
 
