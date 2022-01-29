@@ -13,12 +13,9 @@ const Timer = () => {
       </Text>
       <Flex gap="0.5rem">
         <Button
-          bgColor="orange.400"
-          color="white"
+          colorScheme="litkode"
           width="50%"
           onClick={isRunning ? pause : start}
-          _hover={{ bgColor: "orange.500" }}
-          _active={{ bgColor: "orange.600" }}
         >
           {isRunning ? "Pause" : "Start"}
         </Button>

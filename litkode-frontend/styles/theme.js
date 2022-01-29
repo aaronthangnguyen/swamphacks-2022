@@ -16,6 +16,13 @@ const theme = extendTheme({
       },
     },
   },
+  colors: {
+    litkode: {
+      500: "#ED8936",
+      600: "#DD6B20",
+      700: "#C05621",
+    },
+  },
 });
 
 export default theme;
