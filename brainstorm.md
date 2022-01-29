@@ -68,7 +68,7 @@
 ```json
 {
   "rating": int (optional),
-  "lastPractice": Date (optional)
+  "lastPracticeDate": Date (optional)
 }
 ```
 
