@@ -33,7 +33,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
         transition="all .2s ease-in-out"
         _hover={{
           boxShadow: "md",
-          transform: "translateY(-0.125rem) scale(1.05)",
+          transform: "translateY(-0.125rem) scale(1.02)",
         }}
       >
         <Flex justify="space-between" align="center" gap={1}>
