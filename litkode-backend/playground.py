@@ -91,3 +91,4 @@ async def delete_item(id: str):
     c = conn.cursor()
     sql = """DELETE FROM User WHERE id = ?"""
     c.execute(sql, (id,))
+    conn.commit()
