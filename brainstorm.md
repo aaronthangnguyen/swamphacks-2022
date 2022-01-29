@@ -13,42 +13,70 @@
 - Recommend users weak topics
 - Add timer
 
-## Frontend
+### `api/questions`
 
-## Backend
+**GET** `api/questions`
 
-**GET** "/questions"
-
-```javascript
+```json
 {
   data: [
     {
       id: string,
       title: string,
-      titleSlug: string
+      titleSlug: string,
       difficulty: string,
       topicTags: [
         id: string,
         name: string,
         slug: string
       ]
-    }
+    }, ...
   ]
 }
 ```
 
-**POST** "/questions"
+**GET** `api/questions/[:id]`
 
-```javascript
+```json
 {
-  id: string;
+  id: string,
+  title: string,
+  titleSlug: string,
+  difficulty: string,
+  topicTags: [
+    id: string,
+    name: string,
+    slug: string
+  ]
 }
 ```
 
-**DELETE** "/questions"
+**POST** `api/questions`
 
-```javascript
+```json
 {
-  id: string;
+  id: string
 }
+```
+
+**DELETE** `api/questions/[:id]`
+
+**PATCH** `api/questions/[:id]`
+
+```json
+{
+  rating: int
+}
+```
+
+### `api/recommendations`
+
+**GET** `api/recommendations`
+
+```json
+  {
+    data: [
+      id,...
+    ]
+  }
 ```
