@@ -1,15 +1,12 @@
-
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.middleware.cors import CORSMiddleware
-from databases import Database
+import json
 import pandas as pd
 import requests
 import numpy as np
-import json
 import sqlite3
 from sqlite3 import Error
-database = Database("sqlite:///sampleSQLite.db")
-DB_FILE_PATH = 'sampleSQLite.db'
+from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
+app = FastAPI()
 def connect_to_db(db_file):
     """
     Connect to an SQlite database, if db file does not exist it will be created
@@ -28,55 +25,43 @@ def connect_to_db(db_file):
         if sqlite3_conn is not None:
             sqlite3_conn.close()
 
-conn = connect_to_db(DB_FILE_PATH)
-app = FastAPI()
-@app.on_event("startup")
-async def database_connect():
-    await database.connect()
+conn = connect_to_db('/Users/yagya/Desktop/database.db')
 
+@app.on_event("startup")
+def checkConnection():
+    if conn is None:
+        print("connection failed")
 
 @app.on_event("shutdown")
-async def database_disconnect():
-    await database.disconnect()
+def closeConnection():
+    conn.close()
 
-@app.get("/questions")
+@app.get("/api/questions")
 async def read_data():
-    query = "SELECT * FROM random"
-    results = await database.fetch_all(query=query)
-    return results
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM User')
+    r = [dict((cur.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cur.fetchall()]
+    return json.dumps(r)
+    # result = c.fetchall()
+    # return result
 
-@app.get("/questions/{id}")
-async def fetch_data(id: int):
-    query = "SELECT * FROM random WHERE ID={}".format(str(id))
-    results = await database.fetch_all(query=query)
+# @app.get("/api/questions/{id}")
+# async def read_data():
+#     c = conn.cursor()
+#     c.execute('SELECT * FROM User')
+#     result = c.fetchall()
+#     return result
 
-    return results
-@app.get("/{id}")
-async def get_data(id: int):
-    r = requests.get('https://lcid.cc/info/{}'.format(str(id)))
-    data = r.json()
-    df = pd.DataFrame.from_dict(data, orient='columns')
-    df = df.drop('acRate', 1)
-    df = df.drop('freqBar', 1)
-    df = df.drop('isFavor', 1)
-    df = df.drop('paidOnly', 1)
-    df = df.drop('status', 1)
-    df = df.drop('hasSolution', 1)
-    df = df.drop('hasVideoSolution', 1)
-    df.rename(columns={'frontendQuestionId': 'id'}, inplace=True)
-    xz = df.join(pd.json_normalize(df["topicTags"].tolist()).add_prefix("topicTags")).drop(["topicTags"], axis=1)
-    if conn is not None:
-        c = conn.cursor()
-        c.execute('CREATE TABLE IF NOT EXISTS ' + 'random' +
-                    '(difficulty        VARCHAR,'
-                    'id        VARCHAR,'
-                    'title        VARCHAR,'
-                    'titleSlug  VARCHAR,'
-                    'topicTagsname    VARCHAR,'
-                    'topicTagsid       VARCHAR,'
-                    'topicTagsslug VARCHAR)')
-        xz.to_sql(name="random", con=conn, if_exists='append', index=False)
-        conn.commit()
-        print('SQL insert process finished')
-    else:
-        print('Connection to database failed')
+
+@app.post("/api/questions/{id}")
+async def write_data(id: str):
+    c = conn.cursor()
+    sql = '''INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)'''
+    val = (id,0,None)
+    c.execute(sql,val)
+    conn.commit()
+    print('SQL insert process finished')
+
+# @app.patch("/api/questions/{id}")
+# async def patch_data(id: str):
