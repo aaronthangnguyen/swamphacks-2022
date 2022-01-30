@@ -1,32 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
+import useSWR from "swr";
 import Entry from "./Entry";
 
 const Entries = () => {
-  const data = {
-    data: [
-      {
-        id: "176",
-        rating: 0,
-        lastPracticeDate: null,
-      },
-      {
-        id: "89",
-        rating: 2,
-        lastPracticeDate: new Date(),
-      },
-      {
-        id: "53",
-        rating: 1,
-        lastPracticeDate: new Date(),
-      },
-      {
-        id: "23",
-        rating: 3,
-        lastPracticeDate: new Date(),
-      },
-    ],
-  };
+  const { data, error } = useSWR(`http://localhost:8000/api/questions`);
+
+  if (error) return <Box>Error</Box>;
+  if (!data) return <Box>Loading...</Box>;
+
   return (
     <Box>
       {data?.data.map((entry) => {
