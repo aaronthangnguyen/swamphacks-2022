@@ -85,7 +85,7 @@ async def write_data(item: Item):
     print("SQL insert process finished")
 
 
-@app.patch("/api/questions/{id}")
+@app.patch("/api/questions")
 async def create_data(item: Item):
     item_id = item.id
     item_rating = item.rating
@@ -98,8 +98,9 @@ async def create_data(item: Item):
     print("SQL insert process finished")
 
 
-@app.delete("/api/questions/{id}")
-async def delete_item(id: str):
+@app.delete("/api/questions")
+async def delete_item(item: Item):
+    id = item.id
     c = conn.cursor()
     sql = """DELETE FROM User WHERE id = ?"""
     c.execute(sql, (id,))
