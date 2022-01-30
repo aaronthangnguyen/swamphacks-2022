@@ -64,7 +64,7 @@ def closeConnection():
     conn.close()
 
 
-@app.get("/questions")
+@app.get("/api/questions")
 async def read_data():
     cur = conn.cursor()
     cur.execute("SELECT * FROM User")
@@ -75,7 +75,7 @@ async def read_data():
     return JSONResponse({"data": r})
 
 
-@app.post("/questions", status_code=201)
+@app.post("/api/questions", status_code=201)
 async def write_data(item: Item):
     c = conn.cursor()
     sql = """INSERT INTO User (id, rating, lastPracticeDate) VALUES (?, ?, ?)"""
@@ -85,7 +85,7 @@ async def write_data(item: Item):
     print("SQL insert process finished")
 
 
-@app.patch("/questions")
+@app.patch("/api/questions")
 async def create_data(item: Item):
     item_id = item.id
     item_rating = item.rating
@@ -98,7 +98,7 @@ async def create_data(item: Item):
     print("SQL insert process finished")
 
 
-@app.delete("/questions")
+@app.delete("/api/questions")
 async def delete_item(item: Item):
     id = item.id
     c = conn.cursor()
