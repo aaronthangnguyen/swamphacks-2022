@@ -25,7 +25,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
   const { mutate } = useSWRConfig();
 
   const handleDelete = async () => {
-    await fetch("http://170.187.152.13:8000/api/questions", {
+    await fetch("https://litkode.tech/api/questions", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -34,7 +34,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
       body: JSON.stringify({ id: id }),
     });
 
-    mutate("http://170.187.152.13:8000/api/questions");
+    mutate("https://litkode.tech/api/questions");
   };
   return (
     <>
