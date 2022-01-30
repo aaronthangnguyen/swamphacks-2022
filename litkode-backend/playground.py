@@ -7,12 +7,22 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 import requests
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Item(BaseModel):
@@ -96,16 +106,6 @@ async def delete_item(id: str):
     conn.commit()
 
 
-# end point for recommendations
-# returns data:
-# [
-#     {
-#     "id": str,
-#     "rating": 0,
-#     "lastPracticeDate": null
-#   }...
-# ]
-# for given question_id as input
 def normalizeDifficulty(x):
     return (x / 3) * 4
 
@@ -129,8 +129,9 @@ def yesno(x):
         return True
 
 
-@app.get("/api/recommendations/{id}")
-async def get_rec(id: str):
+@app.get("/api/recommendations")
+async def get_rec(item: Item):
+    id = item.id
     cur = conn.cursor()
     cur.execute("SELECT id, rating FROM User")
     r = [
