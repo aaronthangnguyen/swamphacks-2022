@@ -1,5 +1,8 @@
 import { extendTheme } from "@chakra-ui/react";
 import "@fontsource/ibm-plex-sans";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans/700.css";
 
 const theme = extendTheme({
   fonts: {
@@ -9,8 +12,16 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bgGradient: "linear-gradient(to-r, teal.500, green.500)",
+        // bgGradient: "linear(to-tr, #4158D0, #C850C0, #FFCC70)",
+        bgGradient: "linear(to-r, #FBAB7E, #F7CE68)",
       },
+    },
+  },
+  colors: {
+    litkode: {
+      500: "#ED8936",
+      600: "#DD6B20",
+      700: "#C05621",
     },
   },
 });
