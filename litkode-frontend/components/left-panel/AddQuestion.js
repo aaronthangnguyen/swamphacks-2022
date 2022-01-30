@@ -60,7 +60,7 @@ const Form = ({ idFieldRef, onCancel }) => {
   const handleAdd = async () => {
     onCancel();
 
-    fetch("http://localhost:8000/api/questions", {
+    await fetch("http://localhost:8000/api/questions", {
       method: "POST",
       headers: {
         Accept: "application/json",
