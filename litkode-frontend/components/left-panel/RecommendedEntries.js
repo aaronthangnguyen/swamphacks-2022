@@ -4,7 +4,7 @@ import useSWR from "swr";
 import Entry from "./Entry";
 
 const RecommendedEntries = () => {
-  const { data, error } = useSWR("http://127.0.0.1:8000/api/recommendations/4");
+  const { data, error } = useSWR("https://litkode.tech/api/recommendations/7");
 
   if (error) return <Box>Error</Box>;
   if (!data) return <Box>Loading...</Box>;
