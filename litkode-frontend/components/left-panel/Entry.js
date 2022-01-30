@@ -2,6 +2,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   ExternalLinkIcon,
+  DeleteIcon,
 } from "@chakra-ui/icons";
 import {
   Box,
@@ -38,7 +39,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
       >
         <Flex justify="space-between" align="center" gap={1}>
           <Text width="3rem">{id}</Text>
-          <Text fontWeight="medium" flex={1} isTruncated>
+          <Text fontWeight="medium" width="17rem" isTruncated>
             {data?.title}
           </Text>
           <Text
@@ -48,9 +49,17 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
           >
             {data?.difficulty}
           </Text>
-          <Text fontWeight="medium" width="8rem" color={colors[rating]}>
+          <Text fontWeight="medium" flex={1} color={colors[rating]}>
             {ratings[rating]}
           </Text>
+          {isOpen && (
+            <IconButton
+              size="sm"
+              aria-label="Delete question"
+              colorScheme="red"
+              icon={<DeleteIcon />}
+            />
+          )}
           <IconButton
             size="sm"
             aria-label="Toggle collapse"
