@@ -2,5 +2,8 @@
   "0": "😴 Never",
   "1": "😎 Easy peasy",
   "2": "😌 Okay-ish",
-  "3": "😱 OMG!"
+  "3": "😱 OMG!",
+  "Easy": "1",
+  "Medium": "2",
+  "Hard": "3"
 }
