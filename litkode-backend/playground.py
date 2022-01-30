@@ -130,9 +130,8 @@ def yesno(x):
         return True
 
 
-@app.get("/api/recommendations")
-async def get_rec(item: Item):
-    id = item.id
+@app.get("/api/recommendations/{id}")
+async def get_rec(id: str):
     cur = conn.cursor()
     cur.execute("SELECT id, rating FROM User")
     r = [
@@ -160,9 +159,11 @@ async def get_rec(item: Item):
     for index, row in df.iterrows():
         if row["final"] == True and row["id"] != id:
             array.append(row["id"])
-    dataJson = []
+    data = []
     for ids in array:
         x = Item(id=ids)
-        dataJson.append(x)
+        data.append(
+            {"id": x.id, "rating": x.rating, "lastPracticeDate": x.lastPracticeDate}
+        )
 
-    return dataJson
+    return JSONResponse({"data": data})
