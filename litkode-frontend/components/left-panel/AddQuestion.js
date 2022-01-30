@@ -60,7 +60,7 @@ const Form = ({ idFieldRef, onCancel }) => {
   const handleAdd = async () => {
     onCancel();
 
-    await fetch("http://170.187.152.13:8000/api/questions", {
+    await fetch("https://litkode.tech/api/questions", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -70,7 +70,7 @@ const Form = ({ idFieldRef, onCancel }) => {
     });
 
     setId("");
-    mutate("http://170.187.152.13:8000/api/questions");
+    mutate("https://litkode.tech/api/questions");
   };
   return (
     <Box background="white" rounded="lg" p="1rem" boxShadow="lg">
