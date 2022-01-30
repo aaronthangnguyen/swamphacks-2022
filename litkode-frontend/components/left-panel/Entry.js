@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import colors from "../data/colors.json";
 import ratings from "../data/ratings.json";
 import Rating from "./Rating";
@@ -22,7 +22,14 @@ import Topics from "./Topics";
 const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { data } = useSWR(`https://lcid.cc/info/${id}`);
+  const { mutate } = useSWRConfig();
 
+  const handleDelete = async () => {
+    await fetch(`http://localhost:8000/api/questions/${id}`, {
+      method: "DELETE",
+    });
+    mutate("http://localhost:8000/api/questions");
+  };
   return (
     <>
       <Box
@@ -58,6 +65,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
               aria-label="Delete question"
               colorScheme="red"
               icon={<DeleteIcon />}
+              onClick={handleDelete}
             />
           )}
           <IconButton
