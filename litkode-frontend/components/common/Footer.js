@@ -18,20 +18,20 @@ const Footer = () => {
           {`, `}
           <Link
             fontWeight="semibold"
-            href="https://www.linkedin.com/in/yagyamalik/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Yagya Malik
-          </Link>
-          {`, and `}
-          <Link
-            fontWeight="semibold"
             href="https://www.linkedin.com/in/abhiti-sachdeva/"
             rel="noopener noreferrer"
             target="_blank"
           >
             Abhiti Sachdeva
+          </Link>
+          {`, and `}
+          <Link
+            fontWeight="semibold"
+            href="https://www.linkedin.com/in/yagyamalik/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Yagya Malik
           </Link>
         </Text>
       </Center>
