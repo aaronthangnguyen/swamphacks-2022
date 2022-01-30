@@ -57,6 +57,12 @@ const Form = ({ idFieldRef, onCancel }) => {
   const [id, setId] = useState("");
   const { mutate } = useSWRConfig();
 
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      handleAdd();
+    }
+  };
+
   const handleAdd = async () => {
     onCancel();
 
@@ -82,6 +88,7 @@ const Form = ({ idFieldRef, onCancel }) => {
             ref={idFieldRef}
             value={id}
             onChange={(event) => setId(event.target.value)}
+            onKeyDown={handleEnter}
           />
         </FormControl>
         <ButtonGroup d="flex" justifyContent="flex-end">
