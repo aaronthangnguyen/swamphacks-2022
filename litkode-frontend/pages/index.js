@@ -10,7 +10,10 @@ export default function Home() {
     <Box>
       <Head>
         <title>Litkode🔥</title>
-        <meta name="description" content="A journey to 6-figure salary..." />
+        <meta
+          name="description"
+          content="The journey to a 6-figure salary 🚀"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container maxWidth="container.lg" as="main">
