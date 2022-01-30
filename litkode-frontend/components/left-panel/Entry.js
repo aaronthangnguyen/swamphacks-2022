@@ -25,9 +25,15 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
   const { mutate } = useSWRConfig();
 
   const handleDelete = async () => {
-    await fetch(`http://localhost:8000/api/questions/${id}`, {
+    await fetch("http://localhost:8000/api/questions", {
       method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
     });
+
     mutate("http://localhost:8000/api/questions");
   };
   return (
@@ -97,7 +103,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
                 ? lastPracticeDate.toLocaleString("en-US")
                 : "Never"}
             </Text>
-            <Rating />
+            <Rating id={id} />
           </Flex>
         </Collapse>
       </Box>
