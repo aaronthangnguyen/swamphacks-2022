@@ -15,8 +15,9 @@ import {
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import FocusLock from "react-focus-lock";
+import { useSWRConfig } from "swr";
 
 const AddQuestion = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -53,14 +54,40 @@ const AddQuestion = () => {
 };
 
 const Form = ({ idFieldRef, onCancel }) => {
+  const [id, setId] = useState("");
+  const { mutate } = useSWRConfig();
+
+  const handleAdd = async () => {
+    onCancel();
+
+    await fetch("http://localhost:8000/api/questions", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    });
+
+    setId("");
+    mutate("http://localhost:8000/api/questions");
+  };
   return (
     <Box background="white" rounded="lg" p="1rem" boxShadow="lg">
       <Stack spacing={4}>
         <FormControl>
-          <Input id="question-id" placeholder="ID" ref={idFieldRef} />
+          <Input
+            id="question-id"
+            placeholder="ID"
+            ref={idFieldRef}
+            value={id}
+            onChange={(event) => setId(event.target.value)}
+          />
         </FormControl>
         <ButtonGroup d="flex" justifyContent="flex-end">
-          <Button colorScheme="litkode">Add</Button>
+          <Button colorScheme="litkode" onClick={handleAdd}>
+            Add
+          </Button>
           <Button onClick={onCancel}>Cancel</Button>
         </ButtonGroup>
       </Stack>
