@@ -11,7 +11,7 @@ const Entries = () => {
 
   return (
     <Box>
-      {data?.data.map((entry) => {
+      {data.data.map((entry) => {
         return <Entry key={entry.id} {...entry} />;
       })}
     </Box>
