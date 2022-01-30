@@ -100,7 +100,7 @@ const Entry = ({ id, rating = 0, lastPracticeDate = null }) => {
             <Text fontWeight="medium" color="gray.500">
               Last Practice:{" "}
               {lastPracticeDate
-                ? lastPracticeDate.toLocaleString("en-US")
+                ? new Date(lastPracticeDate).toLocaleString("en-US")
                 : "Never"}
             </Text>
             <Rating id={id} />

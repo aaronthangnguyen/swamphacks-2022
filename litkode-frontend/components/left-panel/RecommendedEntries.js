@@ -3,8 +3,8 @@ import React from "react";
 import useSWR from "swr";
 import Entry from "./Entry";
 
-const Entries = () => {
-  const { data, error } = useSWR("https://litkode.tech/api/questions");
+const RecommendedEntries = () => {
+  const { data, error } = useSWR("http://127.0.0.1:8000/api/recommendations/4");
 
   if (error) return <Box>Error</Box>;
   if (!data) return <Box>Loading...</Box>;
@@ -18,4 +18,4 @@ const Entries = () => {
   );
 };
 
-export default Entries;
+export default RecommendedEntries;

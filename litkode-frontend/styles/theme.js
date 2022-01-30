@@ -13,7 +13,7 @@ const theme = extendTheme({
     global: {
       body: {
         // bgGradient: "linear(to-tr, #4158D0, #C850C0, #FFCC70)",
-        bgGradient: "linear(to-br, #FBAB7E, #F7CE68)",
+        bgGradient: "linear(to-r, #FBAB7E, #F7CE68)",
       },
     },
   },

@@ -1,6 +1,7 @@
-import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
+import React from "react";
 import Entry from "./Entry";
+import RecommendedEntries from "./RecommendedEntries";
 
 const RecommendedQuestions = () => {
   return (
@@ -8,8 +9,7 @@ const RecommendedQuestions = () => {
       <Heading size="lg" mb="1rem">
         🌟 Recommended
       </Heading>
-      <Entry id={176} />
-      <Entry id={171} />
+      <RecommendedEntries />
     </Box>
   );
 };
