@@ -95,6 +95,7 @@ async def delete_item(id: str):
     c.execute(sql, (id,))
     conn.commit()
 
+
 # end point for recommendations
 # returns data:
 # [
@@ -103,12 +104,15 @@ async def delete_item(id: str):
 #     "rating": 0,
 #     "lastPracticeDate": null
 #   }...
-# ] 
+# ]
 # for given question_id as input
 def normalizeDifficulty(x):
-    return (x/3)*4
+    return (x / 3) * 4
+
+
 def normalizeAcRate(x):
-    return (x/100)*4
+    return (x / 100) * 4
+
 
 def difficultyScore(x):
     if x == "Easy":
@@ -116,44 +120,47 @@ def difficultyScore(x):
     elif x == "Medium":
         return 2
     return 3
+
+
 def yesno(x):
-    if x>0:
+    if x > 0:
         return False
     else:
         return True
+
+
 @app.get("/api/recommendations/{id}")
-async def get_rec(id:str):
+async def get_rec(id: str):
     cur = conn.cursor()
-    cur.execute("SELECT id,rating FROM User")
+    cur.execute("SELECT id, rating FROM User")
     r = [
         dict((cur.description[i][0], value) for i, value in enumerate(row))
         for row in cur.fetchall()
-        ]
+    ]
     df = pd.DataFrame(r)
     data = list()
-    for qid in df['id']:
-        r = requests.get('https://lcid.cc/info/{}'.format(str(qid)))
+    for qid in df["id"]:
+        r = requests.get("https://lcid.cc/info/{}".format(str(qid)))
         data.append(r.json())
     acRate = []
     difficulty = []
     for items in data:
-        acRate.append(items['acRate'])
-        difficulty.append(items['difficulty'])
-    df['acRate'] = acRate
-    df['difficulty'] = difficulty
-    df['difficulty'] = df['difficulty'].apply(difficultyScore)
-    df['difficulty'] = df['difficulty'].apply(normalizeDifficulty)
-    df['acRate'] = df['acRate'].apply(normalizeAcRate)
-    df['final'] = (df['acRate']+df['rating'])-2*df['difficulty']
-    df['final'] = df['final'].apply(yesno)
+        acRate.append(items["acRate"])
+        difficulty.append(items["difficulty"])
+    df["acRate"] = acRate
+    df["difficulty"] = difficulty
+    df["difficulty"] = df["difficulty"].apply(difficultyScore)
+    df["difficulty"] = df["difficulty"].apply(normalizeDifficulty)
+    df["acRate"] = df["acRate"].apply(normalizeAcRate)
+    df["final"] = (df["acRate"] + df["rating"]) - 2 * df["difficulty"]
+    df["final"] = df["final"].apply(yesno)
     array = []
     for index, row in df.iterrows():
-        if row['final'] == True and row['id']!= id:
-            array.append(row['id'])
+        if row["final"] == True and row["id"] != id:
+            array.append(row["id"])
     dataJson = []
     for ids in array:
-        x = Item(id = ids)
+        x = Item(id=ids)
         dataJson.append(x)
 
     return dataJson
-
