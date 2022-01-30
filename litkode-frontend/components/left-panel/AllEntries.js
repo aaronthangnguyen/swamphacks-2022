@@ -3,7 +3,7 @@ import React from "react";
 import useSWR from "swr";
 import Entry from "./Entry";
 
-const Entries = () => {
+const AllEntries = () => {
   const { data, error } = useSWR("https://litkode.tech/api/questions");
 
   if (error) return <Box>Error</Box>;
@@ -18,4 +18,4 @@ const Entries = () => {
   );
 };
 
-export default Entries;
+export default AllEntries;
