@@ -4,7 +4,7 @@ import useSWR from "swr";
 import Entry from "./Entry";
 
 const Entries = () => {
-  const { data, error } = useSWR("http://localhost:8000/api/questions");
+  const { data, error } = useSWR("http://170.187.152.13:8000/api/questions");
 
   if (error) return <Box>Error</Box>;
   if (!data) return <Box>Loading...</Box>;

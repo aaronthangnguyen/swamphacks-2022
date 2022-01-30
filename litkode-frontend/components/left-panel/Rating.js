@@ -9,7 +9,7 @@ const Rating = ({ id }) => {
 
   const handleUpdate = async (label) => {
     const rating = ratings[label];
-    await fetch(`http://localhost:8000/api/questions`, {
+    await fetch(`http://170.187.152.13:8000/api/questions`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -21,7 +21,7 @@ const Rating = ({ id }) => {
         lastPracticeDate: new Date().toJSON(),
       }),
     });
-    mutate("http://localhost:8000/api/questions");
+    mutate("http://170.187.152.13:8000/api/questions");
   };
   return (
     <Box mb="0.25rem">
