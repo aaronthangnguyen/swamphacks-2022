@@ -11,7 +11,7 @@ const RecommendedEntries = () => {
 
   return (
     <Box>
-      {data?.data?.map((entry) => {
+      {data?.data?.slice(0, 3).map((entry) => {
         return <Entry key={entry.id} {...entry} />;
       })}
     </Box>
